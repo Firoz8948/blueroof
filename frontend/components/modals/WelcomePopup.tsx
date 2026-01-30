@@ -6,6 +6,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import Image from 'next/image';
 
 const cities = ['Virar', 'Nallasopara', 'Vasai', 'Mumbai'] as const;
 
@@ -92,19 +93,40 @@ export default function WelcomePopup() {
           </svg>
         </button>
 
-        {/* Header */}
-        <div className="bg-gradient-to-r from-blue-600 to-blue-700 px-6 py-8 text-center">
-          <div className="inline-flex items-center justify-center w-16 h-16 bg-white/20 rounded-full mb-4">
-            <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
-            </svg>
+        {/* Header (hero image background) */}
+        <div className="relative px-6 py-8 text-center overflow-hidden">
+          {/* Mobile hero */}
+          <Image
+            src="/mobhero.png"
+            alt=""
+            fill
+            priority
+            className="object-cover md:hidden"
+          />
+          {/* Desktop hero */}
+          <Image
+            src="/blueroofhero.jpeg"
+            alt=""
+            fill
+            priority
+            className="object-cover hidden md:block"
+          />
+          {/* Overlay */}
+          <div className="absolute inset-0 bg-black/55" />
+
+          <div className="relative">
+            <div className="inline-flex items-center justify-center w-16 h-16 bg-white/15 rounded-full mb-4 backdrop-blur-sm">
+              <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+              </svg>
+            </div>
+            <h2 className="text-2xl font-bold text-white mb-2">
+              Welcome to BlueRoof Realty!
+            </h2>
+            <p className="text-white/90">
+              Find your dream home in just a few clicks
+            </p>
           </div>
-          <h2 className="text-2xl font-bold text-white mb-2">
-            Welcome to BlueRoof Realty!
-          </h2>
-          <p className="text-blue-100">
-            Find your dream home in just a few clicks
-          </p>
         </div>
 
         {/* Form */}
