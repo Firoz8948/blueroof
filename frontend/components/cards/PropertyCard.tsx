@@ -263,6 +263,7 @@ export default function PropertyCard({
                 <button
                   key={index}
                   type="button"
+                  suppressHydrationWarning
                   onClick={() => goToSlide(index)}
                   className={`h-2 rounded-full transition-all ${
                     index === currentImageIndex
@@ -280,6 +281,7 @@ export default function PropertyCard({
             <>
               <button
                 type="button"
+                suppressHydrationWarning
                 onClick={prevSlide}
                 className="hidden md:flex absolute left-2 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"
                 aria-label="Previous image"
@@ -290,6 +292,7 @@ export default function PropertyCard({
               </button>
               <button
                 type="button"
+                suppressHydrationWarning
                 onClick={nextSlide}
                 className="hidden md:flex absolute right-2 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"
                 aria-label="Next image"

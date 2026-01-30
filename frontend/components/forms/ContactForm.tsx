@@ -66,6 +66,7 @@ export default function ContactForm() {
           onChange={handleChange}
           placeholder="Your Name"
           required
+          suppressHydrationWarning
           className="w-full pl-12 pr-4 py-4 rounded-xl border-2 border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all bg-gray-50 focus:bg-white"
         />
       </div>
@@ -82,6 +83,7 @@ export default function ContactForm() {
           onChange={handleChange}
           placeholder="Your Email"
           required
+          suppressHydrationWarning
           className="w-full pl-12 pr-4 py-4 rounded-xl border-2 border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all bg-gray-50 focus:bg-white"
         />
       </div>
@@ -98,6 +100,7 @@ export default function ContactForm() {
           onChange={handleChange}
           placeholder="Your Phone Number"
           required
+          suppressHydrationWarning
           className="w-full pl-12 pr-4 py-4 rounded-xl border-2 border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all bg-gray-50 focus:bg-white"
         />
       </div>
@@ -113,6 +116,7 @@ export default function ContactForm() {
           onChange={handleChange}
           placeholder="Your Message (Optional)"
           rows={4}
+          suppressHydrationWarning
           className="w-full pl-12 pr-4 py-4 rounded-xl border-2 border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all resize-none bg-gray-50 focus:bg-white"
         />
       </div>
@@ -134,10 +138,11 @@ export default function ContactForm() {
       )}
       <Button
         type="submit"
-        variant="default"
+        variant="primary"
         size="lg"
         fullWidth
         disabled={isSubmitting}
+        suppressHydrationWarning
         className="mt-6 py-4 text-lg font-semibold shadow-lg hover:shadow-xl transition-all"
       >
         {isSubmitting ? (

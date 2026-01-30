@@ -6,6 +6,32 @@
 import Image from 'next/image';
 import ContactForm from '@/components/forms/ContactForm';
 
+const operatingAreaStyles: Record<
+  string,
+  { gradient: string; border: string; text: string }
+> = {
+  Virar: {
+    gradient: 'from-blue-50 to-blue-100',
+    border: 'border-blue-200 hover:border-blue-400',
+    text: 'text-blue-900',
+  },
+  Nallasopara: {
+    gradient: 'from-fuchsia-50 to-pink-100',
+    border: 'border-fuchsia-200 hover:border-fuchsia-400',
+    text: 'text-fuchsia-900',
+  },
+  Vasai: {
+    gradient: 'from-emerald-50 to-teal-100',
+    border: 'border-emerald-200 hover:border-emerald-400',
+    text: 'text-emerald-900',
+  },
+  Mumbai: {
+    gradient: 'from-amber-50 to-orange-100',
+    border: 'border-amber-200 hover:border-amber-400',
+    text: 'text-amber-900',
+  },
+};
+
 export default function ContactPage() {
   return (
     <div className="relative">
@@ -128,19 +154,28 @@ export default function ContactPage() {
                   <h3 className="text-xl font-bold text-gray-900 mb-4">Our Operating Areas</h3>
                   <div className="grid grid-cols-2 gap-3">
                     {['Virar', 'Nallasopara', 'Vasai', 'Mumbai'].map((area) => (
+                      (() => {
+                        const styles = operatingAreaStyles[area] ?? {
+                          gradient: 'from-gray-50 to-gray-100',
+                          border: 'border-gray-200 hover:border-gray-300',
+                          text: 'text-gray-900',
+                        };
+                        return (
                       <div
                         key={area}
-                        className="p-4 bg-white rounded-lg border border-gray-200 text-center hover:border-blue-500 hover:bg-blue-50 transition-all"
+                        className={`p-4 rounded-lg border text-center transition-all bg-gradient-to-br ${styles.gradient} ${styles.border} hover:shadow-md`}
                       >
-                        <p className="font-semibold text-gray-900">{area}</p>
+                        <p className={`font-semibold ${styles.text}`}>{area}</p>
                       </div>
+                        );
+                      })()
                     ))}
                   </div>
                 </div>
               </div>
 
               {/* Right Side - Enquiry Form */}
-              <div className="bg-white p-8 rounded-xl shadow-lg border border-gray-200">
+              <div className="bg-gradient-to-br from-white to-blue-50 p-8 rounded-xl shadow-lg border border-blue-200/60">
                 <h3 className="text-2xl font-bold text-gray-900 mb-2">Send Us an Enquiry</h3>
                 <p className="text-gray-600 mb-6">Fill out the form below and we'll get back to you within 24 hours</p>
                 <ContactForm />
