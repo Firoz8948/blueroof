@@ -7,7 +7,7 @@
 
 import { useEffect, useMemo, useState } from 'react';
 import Image from 'next/image';
-import Link from 'next/link';
+import PropertyInquiryModal, { type InquiryType } from '@/components/modals/PropertyInquiryModal';
 
 interface LocationAmenities {
   schools?: string; // Distance or count
@@ -50,6 +50,7 @@ export default function PropertyCard({
   const [touchStart, setTouchStart] = useState<number | null>(null);
   const [touchEnd, setTouchEnd] = useState<number | null>(null);
   const [isQuickDetailsOpen, setIsQuickDetailsOpen] = useState(false);
+  const [inquiryModalType, setInquiryModalType] = useState<InquiryType | null>(null);
 
   // Minimum swipe distance (in pixels)
   const minSwipeDistance = 50;
@@ -327,22 +328,20 @@ export default function PropertyCard({
           </div>
 
           <div className="mt-3 grid grid-cols-2 gap-2">
-            <Link
-              href={`/contact?type=site-visit&propertyId=${encodeURIComponent(
-                id
-              )}&property=${encodeURIComponent(title)}`}
+            <button
+              type="button"
+              onClick={() => setInquiryModalType('site-visit')}
               className="w-full text-center bg-blue-600 text-white px-3 py-2 rounded-lg hover:bg-blue-700 transition-colors duration-200 font-medium text-sm"
             >
               Book Site Visit
-            </Link>
-            <Link
-              href={`/contact?type=expert&propertyId=${encodeURIComponent(
-                id
-              )}&property=${encodeURIComponent(title)}`}
+            </button>
+            <button
+              type="button"
+              onClick={() => setInquiryModalType('expert')}
               className="w-full text-center bg-white border-2 border-blue-600 text-blue-600 px-3 py-2 rounded-lg hover:bg-blue-50 transition-colors duration-200 font-medium text-sm"
             >
               Talk to Expert
-            </Link>
+            </button>
           </div>
 
           <button
@@ -411,22 +410,20 @@ export default function PropertyCard({
 
           {/* Desktop actions: 3 buttons in a row */}
           <div className="mt-6 flex items-center gap-3">
-            <Link
-              href={`/contact?type=site-visit&propertyId=${encodeURIComponent(
-                id
-              )}&property=${encodeURIComponent(title)}`}
+            <button
+              type="button"
+              onClick={() => setInquiryModalType('site-visit')}
               className="flex-1 text-center bg-blue-600 text-white px-4 py-3 rounded-xl hover:bg-blue-700 transition-colors duration-200 font-semibold"
             >
               Book Site Visit
-            </Link>
-            <Link
-              href={`/contact?type=expert&propertyId=${encodeURIComponent(
-                id
-              )}&property=${encodeURIComponent(title)}`}
+            </button>
+            <button
+              type="button"
+              onClick={() => setInquiryModalType('expert')}
               className="flex-1 text-center bg-white border-2 border-blue-600 text-blue-600 px-4 py-3 rounded-xl hover:bg-blue-50 transition-colors duration-200 font-semibold"
             >
               Talk to Expert
-            </Link>
+            </button>
             <a
               href={whatsappUrl}
               target="_blank"
@@ -558,14 +555,16 @@ export default function PropertyCard({
 
             {/* Footer actions */}
             <div className="p-4 border-t border-gray-200 flex items-center gap-2">
-              <Link
-                href={`/contact?type=expert&propertyId=${encodeURIComponent(
-                  id
-                )}&property=${encodeURIComponent(title)}`}
+              <button
+                type="button"
+                onClick={() => {
+                  setIsQuickDetailsOpen(false);
+                  setInquiryModalType('expert');
+                }}
                 className="flex-1 text-center bg-blue-600 text-white px-4 py-2.5 rounded-xl hover:bg-blue-700 transition-colors duration-200 font-semibold"
               >
                 Talk to Expert
-              </Link>
+              </button>
 
               <a
                 href={whatsappUrl}
@@ -583,6 +582,20 @@ export default function PropertyCard({
           </div>
         </div>
       )}
+
+      {/* Property Inquiry Modal */}
+      <PropertyInquiryModal
+        isOpen={inquiryModalType !== null}
+        onClose={() => setInquiryModalType(null)}
+        type={inquiryModalType ?? 'site-visit'}
+        property={{
+          id,
+          title,
+          location,
+          price,
+          images,
+        }}
+      />
     </>
   );
 }

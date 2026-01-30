@@ -6,6 +6,7 @@
 
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
+import WelcomePopup from '@/components/modals/WelcomePopup';
 
 export default function PublicLayout({
   children,
@@ -17,6 +18,7 @@ export default function PublicLayout({
       <Header />
       <main className="flex-grow relative">{children}</main>
       <Footer />
+      <WelcomePopup />
     </div>
   );
 }
