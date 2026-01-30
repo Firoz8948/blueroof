@@ -1,0 +1,14 @@
+{
+  "name": "blueroof-backend",
+  "version": "1.0.0",
+  "description": "Node.js modular monolith backend for BlueRoof Realty CRM",
+  "main": "dist/main.js",
+  "scripts": {
+    "dev": "ts-node-dev src/main.ts",
+    "build": "tsc",
+    "start": "node dist/main.js"
+  },
+  "dependencies": {},
+  "devDependencies": {}
+}
+

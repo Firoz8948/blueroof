@@ -1,0 +1,23 @@
+{
+  "name": "blueroof-frontend",
+  "version": "1.0.0",
+  "description": "Next.js frontend for BlueRoof Realty lead generation platform",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
+  },
+  "devDependencies": {
+    "@types/node": "25.0.6",
+    "@types/react": "19.2.8",
+    "autoprefixer": "^10.4.23",
+    "postcss": "^8.4.31",
+    "tailwindcss": "^3.4.1",
+    "typescript": "5.9.3"
+  },
+  "dependencies": {
+    "next": "^15.1.6",
+    "react": "^19.2.3",
+    "react-dom": "^19.2.3"
+  }
+}
