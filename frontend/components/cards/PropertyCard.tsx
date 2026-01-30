@@ -330,6 +330,7 @@ export default function PropertyCard({
           <div className="mt-3 grid grid-cols-2 gap-2">
             <button
               type="button"
+              suppressHydrationWarning
               onClick={() => setInquiryModalType('site-visit')}
               className="w-full text-center bg-blue-600 text-white px-3 py-2 rounded-lg hover:bg-blue-700 transition-colors duration-200 font-medium text-sm"
             >
@@ -337,6 +338,7 @@ export default function PropertyCard({
             </button>
             <button
               type="button"
+              suppressHydrationWarning
               onClick={() => setInquiryModalType('expert')}
               className="w-full text-center bg-white border-2 border-blue-600 text-blue-600 px-3 py-2 rounded-lg hover:bg-blue-50 transition-colors duration-200 font-medium text-sm"
             >
@@ -346,6 +348,7 @@ export default function PropertyCard({
 
           <button
             type="button"
+            suppressHydrationWarning
             onClick={() => setIsQuickDetailsOpen(true)}
             className="mt-3 w-full text-center bg-gray-900 text-white px-3 py-2 rounded-lg hover:bg-black transition-colors duration-200 font-medium text-sm"
           >
@@ -412,6 +415,7 @@ export default function PropertyCard({
           <div className="mt-6 flex items-center gap-3">
             <button
               type="button"
+              suppressHydrationWarning
               onClick={() => setInquiryModalType('site-visit')}
               className="flex-1 text-center bg-blue-600 text-white px-4 py-3 rounded-xl hover:bg-blue-700 transition-colors duration-200 font-semibold"
             >
@@ -419,6 +423,7 @@ export default function PropertyCard({
             </button>
             <button
               type="button"
+              suppressHydrationWarning
               onClick={() => setInquiryModalType('expert')}
               className="flex-1 text-center bg-white border-2 border-blue-600 text-blue-600 px-4 py-3 rounded-xl hover:bg-blue-50 transition-colors duration-200 font-semibold"
             >

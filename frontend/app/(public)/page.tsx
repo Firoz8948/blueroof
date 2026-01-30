@@ -9,6 +9,7 @@ import Link from 'next/link';
 import PropertyCard from '@/components/cards/PropertyCard';
 import TestimonialCarousel from '@/components/cards/TestimonialCarousel';
 import ContactForm from '@/components/forms/ContactForm';
+import HeroCtas from '@/components/home/HeroCtas';
 
 // Mock properties data (replace with API data later)
 const properties = [
@@ -256,20 +257,7 @@ export default function LandingPage() {
             <p className="text-base sm:text-lg md:text-xl lg:text-3xl text-white mb-6 md:mb-8 drop-shadow-md font-medium px-2">
               Your Trusted Real Estate Partner
             </p>
-            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center px-4">
-              <a
-                href="/properties"
-                className="w-full sm:w-auto bg-blue-600 text-white px-6 sm:px-8 py-2.5 sm:py-3 rounded-lg hover:bg-blue-700 transition-colors duration-200 font-medium text-base sm:text-lg shadow-lg"
-              >
-                View Properties
-              </a>
-              <a
-                href="/contact"
-                className="w-full sm:w-auto bg-white text-blue-600 px-6 sm:px-8 py-2.5 sm:py-3 rounded-lg hover:bg-gray-100 transition-colors duration-200 font-medium text-base sm:text-lg shadow-lg"
-              >
-                Get a Call
-              </a>
-            </div>
+            <HeroCtas />
           </div>
         </div>
       </div>

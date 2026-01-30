@@ -18,7 +18,7 @@ interface PropertyInquiryModalProps {
     id: string;
     title: string;
     location: string;
-    price: string;
+    price?: string;
     images: string[];
   };
 }
@@ -153,7 +153,8 @@ export default function PropertyInquiryModal({
               {property.title}
             </h3>
             <p className="text-white/90 text-sm flex items-center gap-1">
-              <span>📍</span> {property.location} • {property.price}
+              <span>📍</span> {property.location}
+              {property.price ? <span> • {property.price}</span> : null}
             </p>
           </div>
         </div>

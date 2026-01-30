@@ -8,9 +8,11 @@
 
 import Link from 'next/link';
 import { useState } from 'react';
+import { useInquiryModal } from '@/components/modals/InquiryModalProvider';
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { openExpert } = useInquiryModal();
 
   const navLinks = [
     { href: '/', label: 'Home' },
@@ -41,12 +43,14 @@ export default function Header() {
                 {link.label}
               </Link>
             ))}
-            <Link
-              href="/contact"
+            <button
+              type="button"
+              onClick={() => openExpert()}
               className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors duration-200 font-medium shadow-lg"
+              suppressHydrationWarning
             >
               Get a Call
-            </Link>
+            </button>
           </nav>
 
           {/* Mobile Menu Button */}
@@ -87,13 +91,17 @@ export default function Header() {
                   {link.label}
                 </Link>
               ))}
-              <Link
-                href="/contact"
+              <button
+                type="button"
+                onClick={() => {
+                  setIsMenuOpen(false);
+                  openExpert();
+                }}
                 className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors duration-200 font-medium text-center mt-2"
-                onClick={() => setIsMenuOpen(false)}
+                suppressHydrationWarning
               >
                 Get a Call
-              </Link>
+              </button>
             </div>
           </nav>
         )}
