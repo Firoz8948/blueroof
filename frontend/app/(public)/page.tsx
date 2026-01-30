@@ -259,8 +259,8 @@ export default function LandingPage() {
           </p>
         </div>
 
-        {/* Properties Grid - 2 cards per row on mobile, 2 on desktop */}
-        <div className="grid grid-cols-2 lg:grid-cols-2 gap-3 md:gap-8 mb-8">
+        {/* Properties Grid - 1 per row on mobile */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-3 md:gap-8 mb-8">
           {properties.map((property) => (
             <PropertyCard key={property.id} {...property} />
           ))}
