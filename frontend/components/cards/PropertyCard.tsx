@@ -30,8 +30,14 @@ interface PropertyCardProps {
   area: string;
   bedrooms?: number;
   bathrooms?: number;
-  images: string[]; // Array of image URLs
-  amenities?: LocationAmenities; // Location-based amenities
+  /** e.g. "1 BHK, 2 BHK" when project has multiple configurations */
+  bedroomOptions?: string;
+  images: string[];
+  amenities?: LocationAmenities;
+  /** Connectivity options (e.g. stations, highways) */
+  connectivity?: string[];
+  /** Internal amenities (e.g. swimming pool, yoga lawn) */
+  internalAmenities?: string[];
 }
 
 export default function PropertyCard({
@@ -42,8 +48,11 @@ export default function PropertyCard({
   area,
   bedrooms,
   bathrooms,
+  bedroomOptions,
   images,
   amenities,
+  connectivity,
+  internalAmenities,
 }: PropertyCardProps) {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [isMounted, setIsMounted] = useState(false);
@@ -235,6 +244,91 @@ export default function PropertyCard({
       }));
   }, [amenities]);
 
+  // Connectivity icons (by exact label)
+  const connectivityIconMap: Record<string, React.ReactNode> = {
+    'Naigaon Station 5 mins': (
+      <svg className="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
+      </svg>
+    ),
+    'Juchandra Station 5 mins walking': (
+      <svg className="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+      </svg>
+    ),
+    'From Borivali via Western Express Highway, 20 mins': (
+      <svg className="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
+      </svg>
+    ),
+    'Metro 2A, 7 & Proposed 10': (
+      <svg className="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+      </svg>
+    ),
+    'Bhayandar Naigaon Sea Link': (
+      <svg className="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
+      </svg>
+    ),
+  };
+
+  const defaultConnectivityIcon = (
+    <svg className="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+    </svg>
+  );
+
+  // Internal amenities icons
+  const internalAmenityIconMap: Record<string, React.ReactNode> = {
+    'Yoga lawn': (
+      <svg className="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+      </svg>
+    ),
+    'Swimming pool': (
+      <svg className="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+      </svg>
+    ),
+    'Multipurpose hall': (
+      <svg className="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+      </svg>
+    ),
+    'Kids pool': (
+      <svg className="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+      </svg>
+    ),
+    'Cricket ground': (
+      <svg className="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+      </svg>
+    ),
+    'Forest seating': (
+      <svg className="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+      </svg>
+    ),
+    'Pool table': (
+      <svg className="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7" />
+      </svg>
+    ),
+    'Contact for more details': (
+      <svg className="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+      </svg>
+    ),
+  };
+
+  const defaultInternalIcon = (
+    <svg className="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+    </svg>
+  );
+
   return (
     <>
       <div className="bg-white rounded-2xl shadow-lg overflow-hidden md:hover:shadow-xl transition-shadow duration-300 w-full">
@@ -380,7 +474,7 @@ export default function PropertyCard({
             </div>
             <div className="flex items-center gap-2">
               <span className="font-semibold text-gray-900">Bedrooms:</span>
-              <span>{bedrooms ? `${bedrooms} BHK` : '—'}</span>
+              <span>{bedroomOptions ?? (bedrooms ? `${bedrooms} BHK` : '—')}</span>
             </div>
             <div className="flex items-center gap-2">
               <span className="font-semibold text-gray-900">Bathrooms:</span>
@@ -388,7 +482,57 @@ export default function PropertyCard({
             </div>
           </div>
 
-          {/* Amenities */}
+          {/* Connectivity */}
+          {connectivity && connectivity.length > 0 && (
+            <div className="mt-5 pt-5 border-t border-gray-200">
+              <h4 className="text-sm font-semibold text-gray-900 mb-4">
+                Connectivity
+              </h4>
+              <div className="flex flex-wrap gap-3">
+                {connectivity.map((item, index) => (
+                  <div
+                    key={index}
+                    className="inline-flex items-center gap-2 bg-gray-50 hover:bg-gray-100 transition-colors px-4 py-2.5 rounded-full border border-gray-200"
+                  >
+                    <span className="text-gray-600 flex-shrink-0">
+                      {connectivityIconMap[item] ?? defaultConnectivityIcon}
+                    </span>
+                    <span className="text-sm font-medium text-gray-900">{item}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* Internal Amenities */}
+          {internalAmenities && internalAmenities.length > 0 && (
+            <div className="mt-5 pt-5 border-t border-gray-200">
+              <h4 className="text-sm font-semibold text-gray-900 mb-4">
+                Internal Amenities
+              </h4>
+              <div className="flex flex-wrap gap-3">
+                {internalAmenities.map((item, index) => (
+                  <div
+                    key={index}
+                    className={`inline-flex items-center gap-2 px-4 py-2.5 rounded-full border transition-colors ${
+                      item === 'Contact for more details'
+                        ? 'bg-gray-100 border-gray-200 text-gray-500'
+                        : 'bg-gray-50 hover:bg-gray-100 border-gray-200'
+                    }`}
+                  >
+                    <span className={`flex-shrink-0 ${item === 'Contact for more details' ? 'text-gray-500' : 'text-gray-600'}`}>
+                      {internalAmenityIconMap[item] ?? defaultInternalIcon}
+                    </span>
+                    <span className={`text-sm font-medium ${item === 'Contact for more details' ? 'text-gray-500' : 'text-gray-900'}`}>
+                      {item}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* Nearby Amenities */}
           {formattedAmenities.length > 0 && (
             <div className="mt-5 pt-5 border-t border-gray-200">
               <h4 className="text-sm font-semibold text-gray-900 mb-4">
@@ -523,7 +667,7 @@ export default function PropertyCard({
                   <div className="bg-gray-50 rounded-xl p-3">
                     <p className="text-xs text-gray-500">Bedrooms</p>
                     <p className="text-sm font-semibold text-gray-900">
-                      {bedrooms ? `${bedrooms} BHK` : '—'}
+                      {bedroomOptions ?? (bedrooms ? `${bedrooms} BHK` : '—')}
                     </p>
                   </div>
                   <div className="bg-gray-50 rounded-xl p-3">
@@ -534,7 +678,52 @@ export default function PropertyCard({
                   </div>
                 </div>
 
-                {/* Amenities */}
+                {/* Connectivity */}
+                {connectivity && connectivity.length > 0 && (
+                  <div className="mt-4">
+                    <h4 className="text-sm font-semibold text-gray-900 mb-3">
+                      Connectivity
+                    </h4>
+                    <div className="grid grid-cols-1 gap-2">
+                      {connectivity.map((item, index) => (
+                        <div key={index} className="flex items-center gap-2 text-sm text-gray-700">
+                          <span className="text-gray-500 flex-shrink-0">
+                            {connectivityIconMap[item] ?? defaultConnectivityIcon}
+                          </span>
+                          <span>{item}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {/* Internal Amenities */}
+                {internalAmenities && internalAmenities.length > 0 && (
+                  <div className="mt-4">
+                    <h4 className="text-sm font-semibold text-gray-900 mb-3">
+                      Internal Amenities
+                    </h4>
+                    <div className="flex flex-wrap gap-2">
+                      {internalAmenities.map((item, index) => (
+                        <span
+                          key={index}
+                          className={`inline-flex items-center gap-2 text-xs font-medium px-3 py-1.5 rounded-lg ${
+                            item === 'Contact for more details'
+                              ? 'bg-gray-100 text-gray-500'
+                              : 'bg-gray-100 text-gray-800'
+                          }`}
+                        >
+                          <span className="flex-shrink-0">
+                            {internalAmenityIconMap[item] ?? defaultInternalIcon}
+                          </span>
+                          {item}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {/* Nearby Amenities */}
                 {formattedAmenities.length > 0 && (
                   <div className="mt-4">
                     <h4 className="text-sm font-semibold text-gray-900 mb-3">

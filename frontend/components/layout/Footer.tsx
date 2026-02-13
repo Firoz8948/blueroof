@@ -7,6 +7,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { useEffect, useState } from 'react';
 
 export default function Footer() {
@@ -39,9 +40,15 @@ export default function Footer() {
         <div className="space-y-8 md:space-y-0 md:grid md:grid-cols-4 md:gap-8">
           {/* Company Info */}
           <div className="md:col-span-2">
-            <h3 className="text-2xl font-bold text-blue-400 mb-4">
-              BlueRoof Realty
-            </h3>
+            <Link href="/" className="inline-block mb-4">
+              <Image
+                src="/logo.png"
+                alt="BlueRoof Realty"
+                width={160}
+                height={44}
+                className="h-10 w-auto object-contain"
+              />
+            </Link>
             <p className="text-gray-400 mb-4">
               Your trusted partner in real estate. We help you find your dream
               property and make informed decisions.

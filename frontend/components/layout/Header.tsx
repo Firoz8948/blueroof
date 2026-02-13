@@ -7,6 +7,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { useState } from 'react';
 import { useInquiryModal } from '@/components/modals/InquiryModalProvider';
 
@@ -26,10 +27,15 @@ export default function Header() {
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <Link href="/" className="flex items-center space-x-2">
-            <div className="text-2xl font-bold text-blue-600 md:text-white">
-              BlueRoof Realty
-            </div>
+          <Link href="/" className="flex items-center">
+            <Image
+              src="/logo.png"
+              alt="BlueRoof Realty"
+              width={160}
+              height={44}
+              className="h-9 w-auto md:h-10 object-contain"
+              priority
+            />
           </Link>
 
           {/* Desktop Navigation */}
