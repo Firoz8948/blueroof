@@ -17,13 +17,9 @@ const allProperties = [
     bedroomOptions: '1 BHK, 2 BHK',
     bathrooms: 2,
     images: [
-      '/brr1.png',
-      '/brr2.png',
-      '/brr3.png',
-      '/brr4.png',
-      '/brr1.png',
-      '/brr2.png',
-      '/brr3.png',
+      '/f1.png',
+      '/f3.png',
+      '/f4.png',
     ],
     connectivity: [
       'Naigaon Station 5 mins',

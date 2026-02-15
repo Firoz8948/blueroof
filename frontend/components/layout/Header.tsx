@@ -25,15 +25,15 @@ export default function Header() {
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-white/90 md:bg-transparent backdrop-blur-md md:backdrop-blur-none shadow-md md:shadow-none">
       <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between h-16">
+        <div className="flex items-center justify-between h-16 md:min-h-[7rem] md:py-2">
           {/* Logo */}
           <Link href="/" className="flex items-center">
             <Image
               src="/logo.png"
               alt="BlueRoof Realty"
-              width={160}
-              height={44}
-              className="h-9 w-auto md:h-10 object-contain"
+              width={340}
+              height={92}
+              className="h-9 w-auto md:h-28 object-contain"
               priority
             />
           </Link>
