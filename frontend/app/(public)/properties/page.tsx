@@ -15,11 +15,12 @@ const allProperties = [
     price: '₹ 31.4 Lakhs',
     area: 'Multiple options',
     bedroomOptions: '1 BHK, 2 BHK',
-    bathrooms: 2,
     images: [
       '/f1.png',
+      '/f2.png',
       '/f3.png',
       '/f4.png',
+      '/f5.png',
     ],
     connectivity: [
       'Naigaon Station 5 mins',
@@ -41,12 +42,11 @@ const allProperties = [
   },
   {
     id: '2',
-    title: 'Modern 2 BHK Flat',
-    location: 'Virar',
-    price: '₹ 65 Lakhs',
-    area: '950 sq ft',
-    bedrooms: 2,
-    bathrooms: 2,
+    title: 'Luxury 3, 4, 5 BHK',
+    location: 'Virar West',
+    price: '₹ 1.23 Cr',
+    area: 'Multiple Options Available',
+    bedroomOptions: '3 BHK, 4 BHK, 5 BHK',
     images: [
       '/brr1.png',
       '/brr2.png',
@@ -56,27 +56,27 @@ const allProperties = [
       '/brr2.png',
       '/brr3.png',
     ],
-    amenities: {
-      schools: '4 within 1.5 km',
-      colleges: '2 within 4 km',
-      malls: '1 within 3 km',
-      markets: 'Local market: 0.5 km',
-      railwayStation: '0.8 km',
-      highways: 'NH-8: 1 km',
-      beaches: 'Virar Beach: 3 km',
-      amusementPark: 'Essel World: 12 km',
-      gardens: '1 within 2 km',
-      hospitals: '2 within 3 km',
-    },
+    connectivity: [
+      'Virar Station - 01 Mins',
+      'Bus depo - 01 Mins',
+      'Virar - Safale Ferry - 8 Min',
+      'Ameya club - 4 Mins',
+      'Old Viva college - 4 Mins',
+    ],
+    internalAmenities: [
+      'Roof top luxury Garden',
+      'G+ 10 STORES TOWER',
+      'Commercial G+ 2 Floor',
+    ],
   },
   {
     id: '3',
-    title: 'Spacious 4 BHK Villa',
-    location: 'Vasai',
-    price: '₹ 1.2 Cr',
-    area: '1800 sq ft',
-    bedrooms: 4,
-    bathrooms: 3,
+    title: 'Parikh Group (Modern 1 & 2 BHK)',
+    location: 'Virar',
+    price: '₹ 44 Lacs',
+    area: '460+ Sq. Ft, 700+ Sq. Ft',
+    bedroomOptions: '1 BHK, 2 BHK',
+    tag: 'PRE-LAUNCH Project',
     images: [
       '/brr1.png',
       '/brr2.png',
@@ -86,18 +86,19 @@ const allProperties = [
       '/brr2.png',
       '/brr3.png',
     ],
-    amenities: {
-      schools: '6 within 2.5 km',
-      colleges: '4 within 5 km',
-      malls: '3 within 6 km',
-      markets: 'Multiple nearby',
-      railwayStation: '2 km',
-      highways: 'NH-8: 3 km',
-      beaches: 'Vasai Beach: 5 km',
-      amusementPark: 'Essel World: 10 km',
-      gardens: '3 within 4 km',
-      hospitals: '4 within 5 km',
-    },
+    connectivity: [
+      'Virar Station - 8 mins to the station',
+      'Ferry - 10 mins',
+      'Hospitals/Schools - 10 mins',
+    ],
+    internalAmenities: [
+      'G+2 Commercial Hub',
+      '20ft Grand Double-Height Lobby',
+      'Fitness Center',
+      'Yoga Room',
+      'Pickleball Court',
+      'Live Chess',
+    ],
   },
   {
     id: '4',
@@ -106,7 +107,6 @@ const allProperties = [
     price: '₹ 1.5 Cr',
     area: '1100 sq ft',
     bedrooms: 2,
-    bathrooms: 2,
     images: [
       '/brr1.png',
       '/brr2.png',
@@ -136,7 +136,6 @@ const allProperties = [
     price: '₹ 78 Lakhs',
     area: '1150 sq ft',
     bedrooms: 3,
-    bathrooms: 2,
     images: [
       '/brr1.png',
       '/brr2.png',
@@ -166,7 +165,6 @@ const allProperties = [
     price: '₹ 62 Lakhs',
     area: '900 sq ft',
     bedrooms: 2,
-    bathrooms: 1,
     images: [
       '/brr1.png',
       '/brr2.png',
@@ -196,7 +194,6 @@ const allProperties = [
     price: '₹ 95 Lakhs',
     area: '1400 sq ft',
     bedrooms: 3,
-    bathrooms: 3,
     images: [
       '/brr1.png',
       '/brr2.png',
@@ -226,7 +223,6 @@ const allProperties = [
     price: '₹ 1.8 Cr',
     area: '2000 sq ft',
     bedrooms: 4,
-    bathrooms: 4,
     images: [
       '/brr1.png',
       '/brr2.png',
@@ -256,7 +252,6 @@ const allProperties = [
     price: '₹ 82 Lakhs',
     area: '1250 sq ft',
     bedrooms: 3,
-    bathrooms: 2,
     images: [
       '/brr1.png',
       '/brr2.png',
@@ -286,7 +281,6 @@ const allProperties = [
     price: '₹ 68 Lakhs',
     area: '1000 sq ft',
     bedrooms: 2,
-    bathrooms: 2,
     images: [
       '/brr1.png',
       '/brr2.png',
@@ -316,7 +310,6 @@ const allProperties = [
     price: '₹ 1.5 Cr',
     area: '2200 sq ft',
     bedrooms: 5,
-    bathrooms: 4,
     images: [
       '/brr1.png',
       '/brr2.png',
@@ -346,7 +339,6 @@ const allProperties = [
     price: '₹ 1.6 Cr',
     area: '1300 sq ft',
     bedrooms: 3,
-    bathrooms: 3,
     images: [
       '/brr1.png',
       '/brr2.png',
@@ -376,7 +368,6 @@ const allProperties = [
     price: '₹ 72 Lakhs',
     area: '1050 sq ft',
     bedrooms: 2,
-    bathrooms: 2,
     images: [
       '/brr1.png',
       '/brr2.png',
@@ -406,7 +397,6 @@ const allProperties = [
     price: '₹ 1.1 Cr',
     area: '1700 sq ft',
     bedrooms: 4,
-    bathrooms: 3,
     images: [
       '/brr1.png',
       '/brr2.png',
@@ -436,7 +426,6 @@ const allProperties = [
     price: '₹ 1.3 Cr',
     area: '1900 sq ft',
     bedrooms: 3,
-    bathrooms: 3,
     images: [
       '/brr1.png',
       '/brr2.png',
