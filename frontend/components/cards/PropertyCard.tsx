@@ -61,6 +61,9 @@ export default function PropertyCard({
   const [touchEnd, setTouchEnd] = useState<number | null>(null);
   const [isQuickDetailsOpen, setIsQuickDetailsOpen] = useState(false);
   const [inquiryModalType, setInquiryModalType] = useState<InquiryType | null>(null);
+  const [connectivityExpanded, setConnectivityExpanded] = useState(false);
+  const [internalAmenitiesExpanded, setInternalAmenitiesExpanded] = useState(false);
+  const [nearbyAmenitiesExpanded, setNearbyAmenitiesExpanded] = useState(false);
 
   // Minimum swipe distance (in pixels)
   const minSwipeDistance = 50;
@@ -572,76 +575,127 @@ export default function PropertyCard({
             )}
           </div>
 
-          {/* Connectivity */}
+          {/* Connectivity (collapsible on desktop) */}
           {connectivity && connectivity.length > 0 && (
             <div className="mt-5 pt-5 border-t border-gray-200">
-              <h4 className="text-sm font-semibold text-gray-900 mb-4">
-                Connectivity
-              </h4>
-              <div className="flex flex-wrap gap-3">
-                {connectivity.map((item, index) => (
-                  <div
-                    key={index}
-                    className="inline-flex items-center gap-2 bg-gray-50 hover:bg-gray-100 transition-colors px-4 py-2.5 rounded-full border border-gray-200"
-                  >
-                    <span className="text-gray-600 flex-shrink-0">
-                      {connectivityIconMap[item] ?? defaultConnectivityIcon}
-                    </span>
-                    <span className="text-sm font-medium text-gray-900">{item}</span>
-                  </div>
-                ))}
-              </div>
+              <button
+                type="button"
+                onClick={() => setConnectivityExpanded((prev) => !prev)}
+                className="flex w-full items-center justify-between gap-2 text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 rounded-lg py-1 -my-1"
+                aria-expanded={connectivityExpanded}
+              >
+                <h4 className="text-sm font-semibold text-gray-900">
+                  Connectivity
+                </h4>
+                <span
+                  className={`flex-shrink-0 text-gray-500 transition-transform duration-200 ${connectivityExpanded ? 'rotate-180' : ''}`}
+                  aria-hidden
+                >
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                  </svg>
+                </span>
+              </button>
+              {connectivityExpanded && (
+                <div className="mt-4 flex flex-wrap gap-3">
+                  {connectivity.map((item, index) => (
+                    <div
+                      key={index}
+                      className="inline-flex items-center gap-2 bg-gray-50 hover:bg-gray-100 transition-colors px-4 py-2.5 rounded-full border border-gray-200"
+                    >
+                      <span className="text-gray-600 flex-shrink-0">
+                        {connectivityIconMap[item] ?? defaultConnectivityIcon}
+                      </span>
+                      <span className="text-sm font-medium text-gray-900">{item}</span>
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
           )}
 
-          {/* Internal Amenities */}
+          {/* Internal Amenities (collapsible on desktop) */}
           {internalAmenities && internalAmenities.length > 0 && (
             <div className="mt-5 pt-5 border-t border-gray-200">
-              <h4 className="text-sm font-semibold text-gray-900 mb-4">
-                Internal Amenities
-              </h4>
-              <div className="flex flex-wrap gap-3">
-                {internalAmenities.map((item, index) => (
-                  <div
-                    key={index}
-                    className={`inline-flex items-center gap-2 px-4 py-2.5 rounded-full border transition-colors ${
-                      item === 'Contact for more details'
-                        ? 'bg-gray-100 border-gray-200 text-gray-500'
-                        : 'bg-gray-50 hover:bg-gray-100 border-gray-200'
-                    }`}
-                  >
-                    <span className={`flex-shrink-0 ${item === 'Contact for more details' ? 'text-gray-500' : 'text-gray-600'}`}>
-                      {internalAmenityIconMap[item] ?? defaultInternalIcon}
-                    </span>
-                    <span className={`text-sm font-medium ${item === 'Contact for more details' ? 'text-gray-500' : 'text-gray-900'}`}>
-                      {item}
-                    </span>
-                  </div>
-                ))}
-              </div>
+              <button
+                type="button"
+                onClick={() => setInternalAmenitiesExpanded((prev) => !prev)}
+                className="flex w-full items-center justify-between gap-2 text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 rounded-lg py-1 -my-1"
+                aria-expanded={internalAmenitiesExpanded}
+              >
+                <h4 className="text-sm font-semibold text-gray-900">
+                  Internal Amenities
+                </h4>
+                <span
+                  className={`flex-shrink-0 text-gray-500 transition-transform duration-200 ${internalAmenitiesExpanded ? 'rotate-180' : ''}`}
+                  aria-hidden
+                >
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                  </svg>
+                </span>
+              </button>
+              {internalAmenitiesExpanded && (
+                <div className="mt-4 flex flex-wrap gap-3">
+                  {internalAmenities.map((item, index) => (
+                    <div
+                      key={index}
+                      className={`inline-flex items-center gap-2 px-4 py-2.5 rounded-full border transition-colors ${
+                        item === 'Contact for more details'
+                          ? 'bg-gray-100 border-gray-200 text-gray-500'
+                          : 'bg-gray-50 hover:bg-gray-100 border-gray-200'
+                      }`}
+                    >
+                      <span className={`flex-shrink-0 ${item === 'Contact for more details' ? 'text-gray-500' : 'text-gray-600'}`}>
+                        {internalAmenityIconMap[item] ?? defaultInternalIcon}
+                      </span>
+                      <span className={`text-sm font-medium ${item === 'Contact for more details' ? 'text-gray-500' : 'text-gray-900'}`}>
+                        {item}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
           )}
 
-          {/* Nearby Amenities */}
+          {/* Nearby Amenities (collapsible on desktop) */}
           {formattedAmenities.length > 0 && (
             <div className="mt-5 pt-5 border-t border-gray-200">
-              <h4 className="text-sm font-semibold text-gray-900 mb-4">
-                Nearby Amenities
-              </h4>
-              <div className="flex flex-wrap gap-3">
-                {formattedAmenities.map((a) => (
-                  <div
-                    key={a.key}
-                    className="inline-flex items-center gap-2 bg-gray-50 hover:bg-gray-100 transition-colors px-4 py-2.5 rounded-full border border-gray-200"
-                    title={`${a.label}: ${a.value}`}
-                  >
-                    <span className="text-gray-600">{a.icon}</span>
-                    <span className="text-sm font-medium text-gray-700">{a.label}</span>
-                    <span className="text-sm text-gray-500">•</span>
-                    <span className="text-sm font-semibold text-gray-900">{a.value}</span>
-                  </div>
-                ))}
-              </div>
+              <button
+                type="button"
+                onClick={() => setNearbyAmenitiesExpanded((prev) => !prev)}
+                className="flex w-full items-center justify-between gap-2 text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 rounded-lg py-1 -my-1"
+                aria-expanded={nearbyAmenitiesExpanded}
+              >
+                <h4 className="text-sm font-semibold text-gray-900">
+                  Nearby Amenities
+                </h4>
+                <span
+                  className={`flex-shrink-0 text-gray-500 transition-transform duration-200 ${nearbyAmenitiesExpanded ? 'rotate-180' : ''}`}
+                  aria-hidden
+                >
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                  </svg>
+                </span>
+              </button>
+              {nearbyAmenitiesExpanded && (
+                <div className="mt-4 flex flex-wrap gap-3">
+                  {formattedAmenities.map((a) => (
+                    <div
+                      key={a.key}
+                      className="inline-flex items-center gap-2 bg-gray-50 hover:bg-gray-100 transition-colors px-4 py-2.5 rounded-full border border-gray-200"
+                      title={`${a.label}: ${a.value}`}
+                    >
+                      <span className="text-gray-600">{a.icon}</span>
+                      <span className="text-sm font-medium text-gray-700">{a.label}</span>
+                      <span className="text-sm text-gray-500">•</span>
+                      <span className="text-sm font-semibold text-gray-900">{a.value}</span>
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
           )}
 
