@@ -72,8 +72,8 @@ export default function PropertyCard({
   isHoveredRef.current = isHovered;
 
   const whatsappUrl = useMemo(() => {
-    const WHATSAPP_NUMBER = '919876543210';
-    const text = `Hi BlueRoof Realty, I'm interested in "${title}" in ${location}. Please share details and help me with a site visit.`;
+    const WHATSAPP_NUMBER = '919503009738';
+    const text = `Hey, I am interested in this "${title}" of the location "${location}"`;
     return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`;
   }, [location, title]);
 

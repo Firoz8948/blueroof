@@ -94,7 +94,7 @@ export default function ContactPage() {
                   {/* Phone */}
                   <div className="mb-6">
                     <a
-                      href="tel:+919876543210"
+                      href="tel:+919503009738"
                       className="flex items-center gap-4 p-5 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow border border-gray-100"
                     >
                       <div className="w-14 h-14 bg-blue-100 rounded-lg flex items-center justify-center flex-shrink-0">
@@ -104,7 +104,7 @@ export default function ContactPage() {
                       </div>
                       <div>
                         <p className="text-sm text-gray-500 mb-1">Phone</p>
-                        <p className="text-lg font-semibold text-gray-900">+91 98765 43210</p>
+                        <p className="text-lg font-semibold text-gray-900">+91 9503009738</p>
                       </div>
                     </a>
                   </div>
@@ -112,7 +112,7 @@ export default function ContactPage() {
                   {/* WhatsApp */}
                   <div className="mb-6">
                     <a
-                      href="https://wa.me/919876543210"
+                      href="https://wa.me/919503009738?text=Hey%2C%20I%20am%20interested%20in%20your%20properties."
                       target="_blank"
                       rel="noopener noreferrer"
                       className="flex items-center gap-4 p-5 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow border border-gray-100"
@@ -141,7 +141,7 @@ export default function ContactPage() {
                       <div>
                         <p className="text-sm text-gray-500 mb-2">Office Location</p>
                         <p className="font-semibold text-gray-900 mb-1">BlueRoof Realty</p>
-                        <p className="text-gray-600 text-sm mb-1">123 Main Street, Virar</p>
+                        <p className="text-gray-600 text-sm mb-1">Virar</p>
                         <p className="text-gray-600 text-sm mb-3">Mumbai, Maharashtra 401303</p>
                         <p className="text-gray-600 text-sm">Mon - Sat: 10:00 AM - 7:00 PM</p>
                       </div>

@@ -28,9 +28,9 @@ export default function Footer() {
       { href: '/terms', label: 'Terms of Service' },
     ],
     contact: [
-      { type: 'phone', value: '+1 (555) 123-4567' },
-      { type: 'email', value: 'info@blueroofrealty.com' },
-      { type: 'address', value: '123 Main St, City, State 12345' },
+      { type: 'phone', value: '+91 9503009738' },
+      { type: 'email', value: 'blueroofrealty1@gmail.com' },
+      { type: 'address', value: 'Virar' },
     ],
   };
 
