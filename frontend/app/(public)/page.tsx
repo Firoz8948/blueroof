@@ -262,7 +262,7 @@ export default function LandingPage() {
       </div>
       
       {/* Properties Section */}
-      <div className="container mx-auto px-4 py-16 bg-[#FCF8F8]">
+      <div className="container mx-auto px-4 py-16 bg-[#FCF8F8] max-w-[1380px]">
         <div className="text-center mb-12">
           <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
             Featured Properties
@@ -272,8 +272,8 @@ export default function LandingPage() {
           </p>
         </div>
 
-        {/* Properties Grid - 1 per row on mobile */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-3 md:gap-8 mb-8">
+        {/* Properties - 1 card per row on all breakpoints */}
+        <div className="grid grid-cols-1 gap-3 md:gap-8 mb-8">
           {properties.map((property) => (
             <PropertyCard key={property.id} {...property} />
           ))}

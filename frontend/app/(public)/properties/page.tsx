@@ -491,7 +491,7 @@ export default function PropertiesPage() {
       </div>
 
       {/* Properties Section */}
-      <div className="container mx-auto px-4 py-16 bg-[#FCF8F8]">
+      <div className="container mx-auto px-4 py-16 bg-[#FCF8F8] max-w-[1380px]">
         <div className="text-center mb-12">
           <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
             All Properties
@@ -501,8 +501,8 @@ export default function PropertiesPage() {
           </p>
         </div>
 
-        {/* Properties Grid - 1 per row on mobile */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4 md:gap-8">
+        {/* Properties - 1 card per row on all breakpoints */}
+        <div className="grid grid-cols-1 gap-4 md:gap-8">
           {allProperties.map((property) => (
             <PropertyCard key={property.id} {...property} />
           ))}
