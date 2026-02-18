@@ -28,11 +28,11 @@ const properties = [
       '/f5.png',
     ],
     connectivity: [
+      'Bhayandar Naigaon Sea Link',
       'Naigaon Station 5 mins',
       'Juchandra Station 5 mins walking',
       'From Borivali via Western Express Highway, 20 mins',
       'Metro 2A, 7 & Proposed 10',
-      'Bhayandar Naigaon Sea Link',
     ],
     internalAmenities: [
       'Yoga lawn',
@@ -42,6 +42,7 @@ const properties = [
       'Cricket ground',
       'Forest seating',
       'Pool table',
+      '50+ more amenities',
       'Contact for more details',
     ],
   },
@@ -107,11 +108,11 @@ const properties = [
   },
   {
     id: '4',
-    title: 'Premium 2 BHK Apartment',
-    location: 'Mumbai',
-    price: '₹ 1.5 Cr',
-    area: '1100 sq ft',
-    bedrooms: 2,
+    title: 'Luxurious Property',
+    location: 'Vasai West',
+    price: '₹ 84.33 Lacs',
+    area: 'Multiple options available in area sq ft',
+    bedroomOptions: '2BHK, 3BHK, 4BHK, 5BHK',
     images: [
       '/brr1.png',
       '/brr2.png',
@@ -121,26 +122,26 @@ const properties = [
       '/brr2.png',
       '/brr3.png',
     ],
+    connectivity: [
+      'Vasai Station - 14 Mins',
+      'Naigaon Station - 12 Mins',
+      'Vasai - Bhyander Ferry - 5 Mins',
+      'Suruchi Beach - 5 Mins',
+    ],
     amenities: {
-      schools: '8 within 1 km',
-      colleges: '5 within 2 km',
-      malls: '4 within 3 km',
-      markets: 'Multiple nearby',
-      railwayStation: '0.5 km',
-      highways: 'WEH: 2 km',
-      beaches: 'Juhu Beach: 8 km',
-      amusementPark: 'Multiple options',
-      gardens: '5 within 2 km',
-      hospitals: '6 within 3 km',
+      markets: 'Cafes',
+      malls: '4 Malls and Dmart',
+      colleges: 'Colleges and School',
+      hospitals: 'Hospitals',
     },
   },
   {
     id: '5',
-    title: 'Elegant 3 BHK Flat',
-    location: 'Nallasopara',
-    price: '₹ 78 Lakhs',
-    area: '1150 sq ft',
-    bedrooms: 3,
+    title: 'Elegant 1BHK & 2BHK',
+    location: 'Virar',
+    price: '₹ 28.99 Lacs',
+    area: 'Multiple options',
+    bedroomOptions: '1 BHK, 2 BHK',
     images: [
       '/brr1.png',
       '/brr2.png',
@@ -150,26 +151,26 @@ const properties = [
       '/brr2.png',
       '/brr3.png',
     ],
-    amenities: {
-      schools: '5 within 2 km',
-      colleges: '3 within 3 km',
-      malls: '2 within 5 km',
-      markets: 'Multiple nearby',
-      railwayStation: '1.5 km',
-      highways: 'NH-8: 2 km',
-      beaches: 'Arnala Beach: 8 km',
-      amusementPark: 'Essel World: 15 km',
-      gardens: '2 within 3 km',
-      hospitals: '3 within 4 km',
-    },
+    connectivity: [
+      'Virar Station - 5 Mins',
+      'Ferry - 10 Mins',
+      'Colleges and Hospitals',
+    ],
+    internalAmenities: [
+      'Club House',
+      'Swimming Pool',
+      'Indoor Gaming Zone',
+      "Kids' Play Area",
+      'Gymnasium',
+    ],
   },
   {
     id: '6',
-    title: 'Contemporary 2 BHK',
-    location: 'Virar',
-    price: '₹ 62 Lakhs',
-    area: '900 sq ft',
-    bedrooms: 2,
+    title: 'Modern 1BHK, 2BHK, 3BHK',
+    location: 'Naigaon',
+    price: '₹ 48.91 Lacs',
+    area: '485+ sq ft',
+    bedroomOptions: '1 BHK, 2 BHK, 3 BHK',
     images: [
       '/brr1.png',
       '/brr2.png',
@@ -179,18 +180,21 @@ const properties = [
       '/brr2.png',
       '/brr3.png',
     ],
-    amenities: {
-      schools: '4 within 1.5 km',
-      colleges: '2 within 4 km',
-      malls: '1 within 3 km',
-      markets: 'Local market: 0.5 km',
-      railwayStation: '0.8 km',
-      highways: 'NH-8: 1 km',
-      beaches: 'Virar Beach: 3 km',
-      amusementPark: 'Essel World: 12 km',
-      gardens: '1 within 2 km',
-      hospitals: '2 within 3 km',
-    },
+    connectivity: [
+      'Naigaon Station',
+      'Easy Highway access',
+    ],
+    internalAmenities: [
+      'Swimming Pool',
+      'Gym',
+      'Spa',
+      'Yoga Zone',
+      'Jogging Track',
+      'Amphitheatre',
+      'Clubhouse',
+      'EV Charging',
+      '50+ Amenities',
+    ],
   },
 ];
 
@@ -273,7 +277,7 @@ export default function LandingPage() {
         </div>
 
         {/* Properties - 1 card per row on all breakpoints */}
-        <div className="grid grid-cols-1 gap-3 md:gap-8 mb-8">
+        <div className="grid grid-cols-1 gap-3 md:gap-20 mb-8">
           {properties.map((property) => (
             <PropertyCard key={property.id} {...property} />
           ))}
