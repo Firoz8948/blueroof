@@ -4,7 +4,17 @@
  */
 
 import Image from 'next/image';
+import type { Metadata } from 'next';
 import ContactForm from '@/components/forms/ContactForm';
+
+export const metadata: Metadata = {
+  title: 'Contact Property Consultant in Virar, Vasai, Nallasopara, Naigaon',
+  description:
+    'Contact BlueRoof Realty for property buying, selling, and site visits in Virar, Vasai, Nallasopara, Naigaon, and Mumbai.',
+  alternates: {
+    canonical: '/contact/',
+  },
+};
 
 const operatingAreaStyles: Record<
   string,

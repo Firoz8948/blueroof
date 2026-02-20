@@ -3,6 +3,15 @@
  */
 
 import Image from 'next/image';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Terms of Service',
+  description: 'Read the terms of service for BlueRoof Realty website usage.',
+  alternates: {
+    canonical: '/terms/',
+  },
+};
 
 export default function TermsPage() {
   return (

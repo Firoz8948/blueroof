@@ -4,7 +4,18 @@
  */
 
 import Image from 'next/image';
+import type { Metadata } from 'next';
 import PropertyCard from '@/components/cards/PropertyCard';
+
+export const metadata: Metadata = {
+  title:
+    'Properties in Virar, Vasai, Nallasopara, Naigaon, Mumbai',
+  description:
+    'Browse verified properties in Virar, Vasai, Nallasopara, Naigaon, and Mumbai with BlueRoof Realty. Compare options, prices, amenities, and book site visits.',
+  alternates: {
+    canonical: '/properties/',
+  },
+};
 
 // Mock properties data (replace with API data later)
 const allProperties = [

@@ -6,10 +6,23 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
+import type { Metadata } from 'next';
 import PropertyCard from '@/components/cards/PropertyCard';
 import TestimonialCarousel from '@/components/cards/TestimonialCarousel';
 import ContactForm from '@/components/forms/ContactForm';
 import HeroCtas from '@/components/home/HeroCtas';
+
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://blueroofrealty.in';
+
+export const metadata: Metadata = {
+  title:
+    'Best Property Consultant in Virar, Vasai, Nallasopara, Naigaon, Mumbai',
+  description:
+    'Looking for the best property consultant in Virar, Vasai, Nallasopara, Naigaon, and Mumbai? BlueRoof Realty helps you find verified homes, schedule site visits, and close confidently.',
+  alternates: {
+    canonical: '/',
+  },
+};
 
 // Mock properties data (replace with API data later)
 const properties = [
@@ -224,9 +237,45 @@ const operatingAreaStyles: Record<
   },
 };
 
+const localBusinessSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'RealEstateAgent',
+  name: 'BlueRoof Realty',
+  url: siteUrl,
+  areaServed: ['Virar', 'Vasai', 'Nallasopara', 'Naigaon', 'Mumbai'],
+  telephone: '+91 9503009738',
+  email: 'blueroofrealty1@gmail.com',
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: 'Virar',
+    addressRegion: 'Maharashtra',
+    addressCountry: 'IN',
+  },
+};
+
+const websiteSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: 'BlueRoof Realty',
+  url: siteUrl,
+  potentialAction: {
+    '@type': 'SearchAction',
+    target: `${siteUrl}/properties/?q={search_term_string}`,
+    'query-input': 'required name=search_term_string',
+  },
+};
+
 export default function LandingPage() {
   return (
     <div className="relative">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
+      />
       {/* Hero Section with Background Image */}
       <div className="relative w-full h-[80vh] md:h-screen" style={{ minHeight: '400px' }}>
         {/* Mobile Hero Image */}
@@ -255,7 +304,7 @@ export default function LandingPage() {
               Welcome to BlueRoof Realty
             </h1>
             <p className="text-base sm:text-lg md:text-xl lg:text-3xl text-white mb-2 drop-shadow-md font-medium px-2">
-              Premium Properties in <span className="font-bold" style={{ color: '#2563eb' }}>Virar, Nallasopara, Vasai & Mumbai</span>
+              Premium Properties in <span className="font-bold" style={{ color: '#2563eb' }}>Virar, Vasai, Nallasopara, Naigaon & Mumbai</span>
             </p>
             <p className="text-base sm:text-lg md:text-xl lg:text-3xl text-white mb-6 md:mb-8 drop-shadow-md font-medium px-2">
               Your Trusted Real Estate Partner

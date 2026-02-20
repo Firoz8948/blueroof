@@ -3,6 +3,15 @@
  */
 
 import Image from 'next/image';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Privacy Policy',
+  description: 'Read the privacy policy of BlueRoof Realty.',
+  alternates: {
+    canonical: '/privacy/',
+  },
+};
 
 export default function PrivacyPage() {
   return (
