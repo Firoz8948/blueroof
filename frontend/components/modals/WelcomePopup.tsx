@@ -7,6 +7,7 @@
 
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
+import { sendLeadEmail } from '@/lib/emailjs';
 
 const cities = ['Virar', 'Nallasopara', 'Vasai', 'Mumbai'] as const;
 
@@ -53,8 +54,15 @@ export default function WelcomePopup() {
     setIsSubmitting(true);
 
     try {
-      // TODO: Connect to backend API
-      await new Promise((resolve) => setTimeout(resolve, 1000));
+      await sendLeadEmail({
+        lead_source: 'Welcome Popup',
+        lead_action: 'Get Started',
+        customer_name: formData.name,
+        customer_phone: formData.phone,
+        preferred_city: formData.city,
+        customer_message: 'Lead captured from welcome popup.',
+        page_url: typeof window !== 'undefined' ? window.location.href : 'N/A',
+      });
       setIsSuccess(true);
       setTimeout(() => {
         handleClose();

@@ -7,6 +7,7 @@
 
 import { useState } from 'react';
 import Button from '@/components/ui/Button';
+import { sendLeadEmail } from '@/lib/emailjs';
 
 export default function ContactForm() {
   const [formData, setFormData] = useState({
@@ -32,11 +33,15 @@ export default function ContactForm() {
     setSubmitStatus('idle');
 
     try {
-      // TODO: Connect to backend API
-      // const response = await createLead(formData);
-      
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      await sendLeadEmail({
+        lead_source: 'Contact Form',
+        lead_action: 'Contact Form Submission',
+        customer_name: formData.name,
+        customer_phone: formData.phone,
+        customer_email: formData.email,
+        customer_message: formData.message,
+        page_url: typeof window !== 'undefined' ? window.location.href : 'N/A',
+      });
       
       setSubmitStatus('success');
       setFormData({ name: '', email: '', phone: '', message: '' });

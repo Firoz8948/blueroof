@@ -7,6 +7,7 @@
 
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
+import { sendLeadEmail } from '@/lib/emailjs';
 
 export type InquiryType = 'site-visit' | 'expert';
 
@@ -90,8 +91,20 @@ export default function PropertyInquiryModal({
     setIsSubmitting(true);
 
     try {
-      // TODO: Connect to backend API
-      await new Promise((resolve) => setTimeout(resolve, 1000));
+      await sendLeadEmail({
+        lead_source: 'Property Card',
+        lead_action: type === 'site-visit' ? 'Book Site Visit' : 'Call Expert',
+        property_name: property.title,
+        property_location: property.location,
+        property_price: property.price,
+        customer_name: formData.name,
+        customer_phone: formData.phone,
+        customer_message:
+          type === 'site-visit'
+            ? 'User requested a site visit.'
+            : 'User requested a call from an expert.',
+        page_url: typeof window !== 'undefined' ? window.location.href : 'N/A',
+      });
       setIsSuccess(true);
       setTimeout(() => {
         onClose();
