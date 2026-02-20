@@ -24,8 +24,8 @@ export default function Footer() {
       { href: '/contact', label: 'Contact' },
     ],
     legal: [
-      { href: '/privacy', label: 'Privacy Policy' },
-      { href: '/terms', label: 'Terms of Service' },
+      { href: '/privacy/', label: 'Privacy Policy' },
+      { href: '/terms/', label: 'Terms of Service' },
     ],
     contact: [
       { type: 'phone', value: '+91 9503009738' },

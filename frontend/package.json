@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "deploy:s3": "next build && aws s3 sync out/ s3://YOUR-BUCKET-NAME/ --delete"
   },
   "devDependencies": {
     "@types/node": "25.0.6",
