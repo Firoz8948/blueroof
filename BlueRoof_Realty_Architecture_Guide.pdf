@@ -1,0 +1,229 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+2 0 obj
+<< /Length 2724 >>
+stream
+BT
+/F1 11 Tf
+50 790 Td
+14 TL
+(BlueRoof Realty - Project Architecture Guide) Tj
+T*
+() Tj
+T*
+(Generated: 2026-02-21 02:42:10) Tj
+T*
+() Tj
+T*
+(1\\) Overview) Tj
+T*
+(- Project type: Next.js frontend for real-estate lead generation.) Tj
+T*
+(- Tech stack: Next.js 15, React 19, TypeScript, Tailwind CSS.) Tj
+T*
+(- Hosting model: Static export for S3/CloudFront.) Tj
+T*
+(- Main goals: Property discovery, lead capture, WhatsApp CTA, SEO.) Tj
+T*
+() Tj
+T*
+(2\\) Runtime and Build) Tj
+T*
+(- Dev: npm run dev) Tj
+T*
+(- Production build: npm run build) Tj
+T*
+(- Static export enabled in next.config.js \\(output: export\\).) Tj
+T*
+(- Trailing slash enabled for S3 compatibility.) Tj
+T*
+(- next/image optimization disabled \\(images.unoptimized = true\\).) Tj
+T*
+(- Output artifact: frontend/out \\(deploy this folder\\).) Tj
+T*
+() Tj
+T*
+(3\\) Top-level Structure) Tj
+T*
+(- app/: route tree and layouts \\(App Router\\).) Tj
+T*
+(  - app/layout.tsx: global metadata, icons, OG, robots defaults.) Tj
+T*
+(  - app/\\(public\\)/layout.tsx: Header, Footer, WelcomePopup, InquiryModalProvider.) Tj
+T*
+(  - app/\\(public\\)/* pages: Home, Properties, About, Contact, Privacy, Terms.) Tj
+T*
+(  - app/\\(admin\\)/* pages: placeholder admin routes \\(noindex from admin layout\\).) Tj
+T*
+(  - app/robots.ts and app/sitemap.ts: generated SEO endpoints.) Tj
+T*
+(- components/: reusable UI and feature modules.) Tj
+T*
+(  - layout/: Header, Footer.) Tj
+T*
+(  - cards/: PropertyCard, testimonial components.) Tj
+T*
+(  - forms/: ContactForm lead capture.) Tj
+T*
+(  - modals/: PropertyInquiryModal, WelcomePopup, provider context.) Tj
+T*
+(- lib/: shared utilities \\(auth/api constants/emailjs\\).) Tj
+T*
+(- store/: client stores \\(auth/lead placeholders\\).) Tj
+T*
+(- public/: static assets \\(hero images, logo, favicon, property media\\).) Tj
+T*
+() Tj
+T*
+(4\\) Routing and Layout Model) Tj
+T*
+(- Root layout wraps entire app and injects global metadata.) Tj
+T*
+(- Public layout composes persistent shell for user-facing pages:) Tj
+T*
+(  Header -> Page Content -> Footer -> Welcome Popup + Inquiry Modal.) Tj
+T*
+(- Route groups \\(public/admin\\) keep URL clean while separating concerns.) Tj
+T*
+() Tj
+T*
+(5\\) Data and Component Flow) Tj
+T*
+(- Home/Properties pages define property arrays \\(mock data currently\\).) Tj
+T*
+(- PropertyCard receives property props and renders desktop/mobile card UIs.) Tj
+T*
+(- PropertyCard actions:) Tj
+T*
+(  - WhatsApp deep link with templated property message.) Tj
+T*
+(  - Book Site Visit / Call Expert open shared modal via context.) Tj
+T*
+(- InquiryModalProvider manages modal state globally and injects) Tj
+T*
+(  PropertyInquiryModal once at layout level.) Tj
+T*
+() Tj
+T*
+(6\\) Lead Capture Architecture) Tj
+T*
+ET
+endstream
+endobj
+3 0 obj
+<< /Type /Page /Parent 6 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 1 0 R >> >> /Contents 2 0 R >>
+endobj
+4 0 obj
+<< /Length 2130 >>
+stream
+BT
+/F1 11 Tf
+50 790 Td
+14 TL
+(- Lead forms:) Tj
+T*
+(  1. Contact form \\(name/email/phone/message\\)) Tj
+T*
+(  2. Property inquiry modal \\(name/phone + action + property context\\)) Tj
+T*
+(  3. Welcome popup \\(name/phone/preferred city\\)) Tj
+T*
+(- All forms call lib/emailjs.ts -> sendLeadEmail\\(\\).) Tj
+T*
+(- EmailJS configuration centralized with service/template/public key.) Tj
+T*
+(- Payload normalization guarantees consistent template fields:) Tj
+T*
+(  lead_source, lead_action, property fields, customer fields, page_url, submitted_at.) Tj
+T*
+() Tj
+T*
+(7\\) SEO Architecture) Tj
+T*
+(- Global metadata in app/layout.tsx includes:) Tj
+T*
+(  title template, keywords, OpenGraph, Twitter, robots, favicon.) Tj
+T*
+(- Page-level metadata added for Home/Properties/About/Contact/Privacy/Terms.) Tj
+T*
+(- Structured data on homepage:) Tj
+T*
+(  - RealEstateAgent schema) Tj
+T*
+(  - WebSite + SearchAction schema) Tj
+T*
+(- robots.txt generation allows public routes and blocks admin routes.) Tj
+T*
+(- sitemap.xml generation includes all public pages.) Tj
+T*
+() Tj
+T*
+(8\\) Deployment Architecture \\(S3\\)) Tj
+T*
+(- Build creates static pages and assets in out/.) Tj
+T*
+(- Upload command: aws s3 sync out/ s3://<bucket>/ --delete) Tj
+T*
+(- Recommended edge: CloudFront in front of S3 for HTTPS and caching.) Tj
+T*
+(- Deployment guide available in DEPLOY_S3.md.) Tj
+T*
+() Tj
+T*
+(9\\) Security and Operational Notes) Tj
+T*
+(- EmailJS public key in frontend is expected for browser SDK usage.) Tj
+T*
+(- Move sensitive operational values to env variables where possible.) Tj
+T*
+(- Add analytics + Search Console verification for SEO operations.) Tj
+T*
+(- Add backend/API if lead persistence beyond EmailJS is required.) Tj
+T*
+() Tj
+T*
+(10\\) Suggested Next Enhancements) Tj
+T*
+(- Replace mock property arrays with CMS/API-driven content.) Tj
+T*
+(- Add dynamic property detail pages and internal linking.) Tj
+T*
+(- Add event analytics for CTA buttons and form funnels.) Tj
+T*
+(- Add CI pipeline for build + S3 sync + invalidation.) Tj
+T*
+(- Introduce automated tests \\(component + e2e\\).) Tj
+T*
+() Tj
+T*
+(End of document.) Tj
+T*
+ET
+endstream
+endobj
+5 0 obj
+<< /Type /Page /Parent 6 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 1 0 R >> >> /Contents 4 0 R >>
+endobj
+6 0 obj
+<< /Type /Pages /Kids [3 0 R 5 0 R] /Count 2 >>
+endobj
+7 0 obj
+<< /Type /Catalog /Pages 6 0 R >>
+endobj
+xref
+0 8
+0000000000 65535 f 
+0000000009 00000 n 
+0000000079 00000 n 
+0000002855 00000 n 
+0000002981 00000 n 
+0000005163 00000 n 
+0000005289 00000 n 
+0000005352 00000 n 
+trailer
+<< /Size 8 /Root 7 0 R >>
+startxref
+5401
+%%EOF
