@@ -6,10 +6,12 @@
 'use client';
 
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import Button from '@/components/ui/Button';
 import { sendLeadEmail } from '@/lib/emailjs';
 
 export default function ContactForm() {
+  const router = useRouter();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -19,6 +21,7 @@ export default function ContactForm() {
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+  const [phoneError, setPhoneError] = useState('');
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({
@@ -27,8 +30,25 @@ export default function ContactForm() {
     });
   };
 
+  const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const digits = e.target.value.replace(/\D/g, '').slice(0, 10);
+    setFormData({
+      ...formData,
+      phone: digits,
+    });
+    if (digits.length > 0 && digits.length < 10) {
+      setPhoneError('Please check number');
+    } else {
+      setPhoneError('');
+    }
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (formData.phone.length !== 10) {
+      setPhoneError('Please check number');
+      return;
+    }
     setIsSubmitting(true);
     setSubmitStatus('idle');
 
@@ -37,14 +57,12 @@ export default function ContactForm() {
         lead_source: 'Contact Form',
         lead_action: 'Contact Form Submission',
         customer_name: formData.name,
-        customer_phone: formData.phone,
+        customer_phone: `+91 ${formData.phone}`,
         customer_email: formData.email,
         customer_message: formData.message,
         page_url: typeof window !== 'undefined' ? window.location.href : 'N/A',
       });
-      
-      setSubmitStatus('success');
-      setFormData({ name: '', email: '', phone: '', message: '' });
+      router.push('/thankyou/');
     } catch (error) {
       setSubmitStatus('error');
     } finally {
@@ -92,22 +110,26 @@ export default function ContactForm() {
           className="w-full pl-12 pr-4 py-4 rounded-xl border-2 border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all bg-gray-50 focus:bg-white"
         />
       </div>
-      <div className="relative">
-        <div className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400">
-          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-          </svg>
+      <div>
+        <div className="flex items-center rounded-xl border-2 border-gray-200 bg-gray-50 focus-within:ring-2 focus-within:ring-blue-500 focus-within:border-blue-500">
+          <span className="pl-4 pr-2 py-4 text-gray-700 font-medium">+91</span>
+          <input
+            type="tel"
+            name="phone"
+            value={formData.phone}
+            onChange={handlePhoneChange}
+            placeholder="Enter 10 digit mobile number"
+            required
+            inputMode="numeric"
+            pattern="[0-9]{10}"
+            maxLength={10}
+            suppressHydrationWarning
+            className="w-full pr-4 py-4 bg-transparent focus:outline-none"
+          />
         </div>
-        <input
-          type="tel"
-          name="phone"
-          value={formData.phone}
-          onChange={handleChange}
-          placeholder="Your Phone Number"
-          required
-          suppressHydrationWarning
-          className="w-full pl-12 pr-4 py-4 rounded-xl border-2 border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all bg-gray-50 focus:bg-white"
-        />
+        {phoneError ? (
+          <p className="text-red-600 text-sm mt-2">{phoneError}</p>
+        ) : null}
       </div>
       <div className="relative">
         <div className="absolute left-4 top-6 text-gray-400">

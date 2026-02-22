@@ -6,6 +6,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { sendLeadEmail } from '@/lib/emailjs';
 
@@ -57,12 +58,14 @@ export default function PropertyInquiryModal({
   type,
   property,
 }: PropertyInquiryModalProps) {
+  const router = useRouter();
   const [formData, setFormData] = useState({
     name: '',
     phone: '',
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [phoneError, setPhoneError] = useState('');
 
   const config = modalConfig[type];
 
@@ -83,11 +86,26 @@ export default function PropertyInquiryModal({
     if (isOpen) {
       setFormData({ name: '', phone: '' });
       setIsSuccess(false);
+      setPhoneError('');
     }
   }, [isOpen]);
 
+  const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const digits = e.target.value.replace(/\D/g, '').slice(0, 10);
+    setFormData({ ...formData, phone: digits });
+    if (digits.length > 0 && digits.length < 10) {
+      setPhoneError('Please check number');
+    } else {
+      setPhoneError('');
+    }
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (formData.phone.length !== 10) {
+      setPhoneError('Please check number');
+      return;
+    }
     setIsSubmitting(true);
 
     try {
@@ -98,17 +116,15 @@ export default function PropertyInquiryModal({
         property_location: property.location,
         property_price: property.price,
         customer_name: formData.name,
-        customer_phone: formData.phone,
+        customer_phone: `+91 ${formData.phone}`,
         customer_message:
           type === 'site-visit'
             ? 'User requested a site visit.'
             : 'User requested a call from an expert.',
         page_url: typeof window !== 'undefined' ? window.location.href : 'N/A',
       });
-      setIsSuccess(true);
-      setTimeout(() => {
-        onClose();
-      }, 3000);
+      onClose();
+      router.push('/thankyou/');
     } catch (error) {
       console.error('Error submitting form:', error);
     } finally {
@@ -224,15 +240,24 @@ export default function PropertyInquiryModal({
                 <label className="block text-sm font-medium text-gray-700 mb-1">
                   Mobile Number
                 </label>
-                <input
-                  type="tel"
-                  required
-                  value={formData.phone}
-                  onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                  placeholder="Enter your mobile number"
-                  className="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
-                  suppressHydrationWarning
-                />
+                <div className="flex items-center rounded-xl border-2 border-gray-200 focus-within:ring-2 focus-within:ring-blue-500 focus-within:border-blue-500">
+                  <span className="pl-4 pr-2 py-3 text-gray-700 font-medium">+91</span>
+                  <input
+                    type="tel"
+                    required
+                    value={formData.phone}
+                    onChange={handlePhoneChange}
+                    placeholder="Enter 10 digit mobile number"
+                    inputMode="numeric"
+                    pattern="[0-9]{10}"
+                    maxLength={10}
+                    className="w-full pr-4 py-3 rounded-r-xl focus:outline-none"
+                    suppressHydrationWarning
+                  />
+                </div>
+                {phoneError ? (
+                  <p className="text-red-600 text-sm mt-2">{phoneError}</p>
+                ) : null}
               </div>
 
               <button

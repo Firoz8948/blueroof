@@ -6,12 +6,14 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { sendLeadEmail } from '@/lib/emailjs';
 
 const cities = ['Virar', 'Nallasopara', 'Vasai', 'Mumbai'] as const;
 
 export default function WelcomePopup() {
+  const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
@@ -20,6 +22,7 @@ export default function WelcomePopup() {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [phoneError, setPhoneError] = useState('');
 
   // Show popup after a short delay if not shown before in this session
   useEffect(() => {
@@ -49,8 +52,22 @@ export default function WelcomePopup() {
     sessionStorage.setItem('welcomePopupSeen', 'true');
   };
 
+  const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const digits = e.target.value.replace(/\D/g, '').slice(0, 10);
+    setFormData({ ...formData, phone: digits });
+    if (digits.length > 0 && digits.length < 10) {
+      setPhoneError('Please check number');
+    } else {
+      setPhoneError('');
+    }
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (formData.phone.length !== 10) {
+      setPhoneError('Please check number');
+      return;
+    }
     setIsSubmitting(true);
 
     try {
@@ -58,15 +75,14 @@ export default function WelcomePopup() {
         lead_source: 'Welcome Popup',
         lead_action: 'Get Started',
         customer_name: formData.name,
-        customer_phone: formData.phone,
+        customer_phone: `+91 ${formData.phone}`,
         preferred_city: formData.city,
         customer_message: 'Lead captured from welcome popup.',
         page_url: typeof window !== 'undefined' ? window.location.href : 'N/A',
       });
-      setIsSuccess(true);
-      setTimeout(() => {
-        handleClose();
-      }, 2000);
+      sessionStorage.setItem('welcomePopupSeen', 'true');
+      handleClose();
+      router.push('/thankyou/');
     } catch (error) {
       console.error('Error submitting form:', error);
     } finally {
@@ -170,15 +186,24 @@ export default function WelcomePopup() {
                 <label className="block text-sm font-medium text-gray-700 mb-1">
                   Mobile Number
                 </label>
-                <input
-                  type="tel"
-                  required
-                  value={formData.phone}
-                  onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                  placeholder="Enter your mobile number"
-                  className="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
-                  suppressHydrationWarning
-                />
+                <div className="flex items-center rounded-xl border-2 border-gray-200 focus-within:ring-2 focus-within:ring-blue-500 focus-within:border-blue-500">
+                  <span className="pl-4 pr-2 py-3 text-gray-700 font-medium">+91</span>
+                  <input
+                    type="tel"
+                    required
+                    value={formData.phone}
+                    onChange={handlePhoneChange}
+                    placeholder="Enter 10 digit mobile number"
+                    inputMode="numeric"
+                    pattern="[0-9]{10}"
+                    maxLength={10}
+                    className="w-full pr-4 py-3 rounded-r-xl focus:outline-none"
+                    suppressHydrationWarning
+                  />
+                </div>
+                {phoneError ? (
+                  <p className="text-red-600 text-sm mt-2">{phoneError}</p>
+                ) : null}
               </div>
 
               <div>
