@@ -7,6 +7,13 @@
   --background-color: #FCF8F8;
 }
 
+html,
+body {
+  overflow-x: hidden;
+  width: 100%;
+  max-width: 100vw;
+}
+
 body {
   color: rgb(var(--foreground-rgb));
   background-color: var(--background-color);

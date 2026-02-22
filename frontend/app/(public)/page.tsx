@@ -355,7 +355,7 @@ export default function LandingPage() {
         </div>
 
         {/* Features Grid - Horizontal scroll on mobile, grid on desktop */}
-        <div className="md:grid md:grid-cols-2 lg:grid-cols-4 md:gap-8 max-w-7xl mx-auto">
+        <div className="md:grid md:grid-cols-2 lg:grid-cols-4 md:gap-8 max-w-7xl mx-auto overflow-hidden">
           <div className="flex md:contents gap-4 overflow-x-auto pb-4 md:pb-0 scrollbar-hide -mx-4 px-4 md:mx-0 md:px-0">
           {/* Feature 1: Local Expertise */}
           <div className="bg-gradient-to-br from-blue-50 to-blue-100 p-8 rounded-xl shadow-lg md:hover:shadow-xl transition-all duration-300 transform md:hover:-translate-y-2 flex-shrink-0 w-[80vw] md:w-auto">
@@ -478,7 +478,7 @@ export default function LandingPage() {
         </div>
 
         {/* Services Grid - Horizontal scroll on mobile, grid on desktop */}
-        <div className="md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-6 max-w-7xl mx-auto">
+        <div className="md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-6 max-w-7xl mx-auto overflow-hidden">
           <div className="flex md:contents gap-4 overflow-x-auto pb-4 md:pb-0 scrollbar-hide -mx-4 px-4 md:mx-0 md:px-0">
           {/* Service 1: Property Buying Assistance */}
           <div className="bg-white p-6 rounded-2xl shadow-lg md:hover:shadow-2xl transition-all duration-300 transform md:hover:-translate-y-1 text-center flex-shrink-0 w-[80vw] md:w-auto">

@@ -16,7 +16,7 @@ export default function PublicLayout({
 }) {
   return (
     <InquiryModalProvider>
-      <div className="flex flex-col min-h-screen">
+      <div className="flex flex-col min-h-screen overflow-x-hidden">
         <Header />
         <main className="flex-grow relative">{children}</main>
         <Footer />
